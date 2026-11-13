@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090b18"><title>ASTRO CONTROL</title>
+<style>
+:root{--line:#292e55;--text:#eef0ff;--muted:#a4aacb;--cyan:#67e8f9}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 50% -15%,#252052 0%,#0b0d1c 48%,#060711 100%);color:var(--text);font-family:system-ui,sans-serif;padding:26px 16px 40px}
+main{max-width:780px;margin:auto}header{text-align:center;margin:8px 0 26px}.orbit{font-size:34px}
+h1{font-size:clamp(30px,7vw,48px);letter-spacing:5px;margin:6px 0 2px;background:linear-gradient(90deg,#c4b5fd,#67e8f9);color:transparent;background-clip:text}
+.sub{color:var(--muted);font-size:12px;letter-spacing:3px}.notice{border:1px solid #41416e;background:#15162d;border-radius:14px;padding:13px 15px;color:#c8c9e8;font-size:13px;line-height:1.5;margin-bottom:22px}
+h2{font-size:14px;letter-spacing:2px;color:#c4b5fd;margin:24px 3px 12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.app{border:1px solid var(--line);border-radius:17px;background:linear-gradient(145deg,#171b35,#0e1123);padding:17px 14px;text-align:left;color:var(--text);min-height:105px;cursor:pointer;display:flex;align-items:center;gap:13px}
+.app:active{transform:scale(.98);border-color:var(--cyan)}.emoji{font-size:29px;width:42px;text-align:center;flex-shrink:0}
+.name{font-weight:700;font-size:15px}.desc{font-size:11px;color:var(--muted);margin-top:4px}.arrow{margin-left:auto;color:var(--cyan);font-size:20px}
+.status{margin-top:18px;min-height:44px;border-radius:12px;padding:12px 14px;background:#0e1224;border:1px solid #252b4b;color:#b9c2e8;font-size:12px;line-height:1.45}
+footer{text-align:center;color:#747b9f;font-size:11px;margin-top:25px}
+@media(max-width:390px){.grid{gap:9px}.app{padding:13px 10px;gap:8px}.emoji{font-size:25px;width:34px}.name{font-size:13px}}
+</style></head><body><main>
+<header><div class="orbit">✦ 🪐 ✦</div><h1>ASTRO CONTROL</h1><div class="sub">CENTRO DE LANZAMIENTO · ANDROID</div></header>
+<div class="notice">Pulsa una tarjeta para intentar abrir la app instalada. Android y Chrome pueden bloquear algunos lanzamientos desde páginas web; si una tarjeta no funciona, no significa necesariamente que la app esté mal instalada.</div>
+<h2>APLICACIONES PRINCIPALES</h2><section class="grid">
+<button class="app" onclick="launch('YouTube','com.google.android.youtube')"><span class="emoji">▶️</span><span><div class="name">YouTube</div><div class="desc">Vídeos y canal</div></span><span class="arrow">↗</span></button>
+<button class="app" onclick="launch('Bambu Handy','com.bambulab.bambulab')"><span class="emoji">🖨️</span><span><div class="name">Bambu Handy</div><div class="desc">Impresora 3D</div></span><span class="arrow">↗</span></button>
+<button class="app" onclick="launch('Seestar','com.zwo.seestar')"><span class="emoji">🔭</span><span><div class="name">Seestar</div><div class="desc">Observatorio</div></span><span class="arrow">↗</span></button>
+<button class="app" onclick="launch('Chrome','com.android.chrome')"><span class="emoji">🌐</span><span><div class="name">Chrome</div><div class="desc">Navegador</div></span><span class="arrow">↗</span></button>
+</section>
+<h2>OTRAS APLICACIONES</h2><section class="grid">
+<button class="app" onclick="launch('TikTok','com.zhiliaoapp.musically')"><span class="emoji">🎵</span><span><div class="name">TikTok</div><div class="desc">Vídeos cortos</div></span><span class="arrow">↗</span></button>
+<button class="app" onclick="launch('WhatsApp','com.whatsapp')"><span class="emoji">💬</span><span><div class="name">WhatsApp</div><div class="desc">Mensajes</div></span><span class="arrow">↗</span></button>
+<button class="app" onclick="launch('Duolingo','com.duolingo')"><span class="emoji">🦉</span><span><div class="name">Duolingo</div><div class="desc">Idiomas</div></span><span class="arrow">↗</span></button>
+<button class="app" onclick="launch('Roborock','com.roborock.smart')"><span class="emoji">🤖</span><span><div class="name">Roborock</div><div class="desc">Robot aspirador</div></span><span class="arrow">↗</span></button>
+</section>
+<div class="status" id="status">Sistema listo. Selecciona una aplicación.</div>
+<footer>ASTRO CONTROL · PANEL PERSONAL · Android</footer></main>
+<script>
+function launch(name,pkg){
+ const status=document.getElementById('status');
+ status.textContent='Solicitando a Android que abra '+name+'…';
+ const intent='intent://launch/#Intent;scheme=astrocontrol;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package='+pkg+';end';
+ window.location.href=intent;
+ setTimeout(()=>{status.textContent='Si no se ha abierto '+name+', Chrome no ha podido resolver su paquete. Podemos ajustar esa app usando el identificador exacto de tu móvil.';},1800);
+}
+</script></body></html>
